@@ -1,0 +1,33 @@
+<div style="text-align:center; padding:20px">
+
+  <h2>📖 AI Story Book</h2>
+
+  <select [(ngModel)]="selectedType">
+    <option value="panchatantra">Panchatantra</option>
+    <option value="tenali">Tenali Raman</option>
+    <option value="akbar">Akbar Birbal</option>
+  </select>
+
+  <br><br>
+
+  <button (click)="generateStory()">Generate Story</button>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div *ngIf="story">
+
+    <!-- ✅ Image -->
+    <img 
+      [src]="imageUrl" 
+      width="300"
+      (error)="imageUrl='https://picsum.photos/400/300'" 
+    />
+
+    <!-- ✅ Story -->
+    <p style="margin-top:20px; font-size:18px">
+      {{ story }}
+    </p>
+
+  </div>
+
+</div>
