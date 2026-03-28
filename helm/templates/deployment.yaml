@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-story
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: ai-story
+  template:
+    metadata:
+      labels:
+        app: ai-story
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "ai-story-role"
+        vault.hashicorp.com/agent-inject-secret-openai: "secret/data/ai-story"
+        vault.hashicorp.com/agent-inject-template-openai: |
+          {{- with secret "secret/data/ai-story" -}}
+          export OPENAI_API_KEY="{{ .Data.data.OPENAI_API_KEY }}"
+          {{- end }}
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: ai-story
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.containerPort }}

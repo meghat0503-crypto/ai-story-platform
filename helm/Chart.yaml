@@ -1,0 +1,4 @@
+apiVersion: v2
+name: ai-story
+description: AI Story App Helm Chart
+version: 0.1.0

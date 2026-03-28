@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class StoryService {
 
-private apiUrl = 'http://13.217.102.251:8080/api/story';
+private apiUrl = '/api/story';
 
   constructor(private http: HttpClient) {}
 

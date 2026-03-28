@@ -9,3 +9,7 @@ backend/target/
 
 # OS
 .DS_Store
+
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
